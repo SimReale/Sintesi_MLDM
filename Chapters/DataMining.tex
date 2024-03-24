@@ -1,7 +1,7 @@
 \chapter{Data Mining}
 \begin{figure}[ht!]
     \centering
-    \includegraphics[scale=0.6]{images/Data_Mining_process.jpg}
+    \includegraphics[scale=0.52]{images/Data_Mining_process.jpg}
     \caption{The Data Mining Process}
 \end{figure}
 
@@ -55,17 +55,69 @@ Moreover, \textbf{DMs} help to address the users' queries more efficiently. By t
 
 Furthermore, \textbf{DMs} often offer improved performance compared to primary DWHs. Due to their smaller size and targeted scope, DMs can deliver faster query response times and better overall system performance. By focusing on specific subsets of data, data marts reduce the complexity of queries and minimize the processing overhead associated with accessing and retrieving information.
 
-\section{Online Analytical Processing (OLAP)}
+\begin{figure}[ht!]
+    \centering
+    \includegraphics[scale=0.39]{images/BI_pyramid.png}
+\end{figure}
+
+\subsection{Online Analytical Processing (OLAP)}
+
+First of all, data are organised in \textbf{tables}, which are defined as collections of related, homogeneous data arranged into a row-column format, which includes:
+\begin{itemize}
+    \item \textbf{Rows:} the various components stored in the table about a \textit{specific individual};
+    \item \textbf{Columns:} the type and the meaning of a \textit{specific component} of the individuals represented in the table;
+    \item \textbf{Key:} a column or a set of columns whose values allow to distinguish \textit{univocally} the rows of the table.
+\end{itemize}
+
+\textbf{\textit{On-Line Analytical Processing (OLAP)}} allows users  to interactively navigate the data warehouse information exploiting the multidimensional model, providing a flexible and intuitive way to explore, query, and report on large datasets. Typically, the data are analyzed at different levels of aggregation, by applying subsequent \textit{\textbf{OLAP operators}}, each yielding one or more different queries.
+
+In an \textbf{OLAP Session} the user can scout the multidimensional model choosing the next operator based on the outcome of the previous ones. In this way, the user creates a navigation path that corresponds to an analysis process for facts according to different points and at different detail levels.
+\begin{quote}
+    \centering
+    \textit{Product} $\longrightarrow$ \textit{Sub-Category} $\longrightarrow$ \textit{Category}
+\end{quote}
+
+The \textbf{OLAP operators} are the following:
+\begin{itemize}
+    \item \textbf{Roll-up:} causes an increase in data aggregation and removes a detail level from a hierarchy.
+    \begin{figure}[ht!]
+        \centering
+        \includegraphics[scale=0.4]{images/OLAP_roll_up.png}
+    \end{figure}
+    \item \textbf{Drill-down:} is the complement to the roll-up operator; it reduces data aggregation and adds a new detail level to a hierarchy (e.g., from category to subcategory).
+    \begin{figure}[ht!]
+        \centering
+        \includegraphics[scale=0.4]{images/OLAP_drill_down.png}
+    \end{figure}
+    \item \textbf{SLice-and-dice:} reduces the number of cube dimensions after setting one of the dimensions to a specific value (e.g., category = 'Food and Beverages'); the dicing operation reduces the set of data being analysed by a selection criterion.
+    \begin{figure}[ht!]
+        \centering
+        \includegraphics[scale=0.6]{images/OLAP_slice_and_dice.png}
+    \end{figure}
+    \item \textbf{Pivot:} implies a change in layouts, aiming at analysing a group of data from a different viewpoint.
+    \begin{figure}[ht!]
+        \centering
+        \includegraphics[scale=0.4]{images/OLAP_pivot.png}
+    \end{figure}
+    \item \textbf{Drill-across:} allows to create a link between concepts in interrelated cubes, in order to compare them.
+    \begin{figure}[ht!]
+        \centering
+        \includegraphics[scale=0.4]{images/OLAP_drill_across.png}
+    \end{figure}
+    \item \textbf{Drill-through:} switches from multidimensional aggregate data to operational data insources or in the reconciled layer.
+    \begin{figure}[ht!]
+        \centering
+        \includegraphics[scale=0.44]{images/OLAP_drill_through.png}
+    \end{figure}
+\end{itemize}
+
+\subsection{Extraction, Transformation and Loading (ETL)}
 
 
 
-\section{Extraction, Transformation and Loading (ETL)}
+\subsection{Data Warehouse Architectures}
 
 
 
-\section{Data Warehouse Architectures}
-
-
-
-\section{Conceptual Modeling: The Dimensional Fact Model (DFM)}
+\subsection{Conceptual Modeling: The Dimensional Fact Model (DFM)}
 
