@@ -79,30 +79,30 @@ In an \textbf{OLAP Session} the user can scout the multidimensional model choosi
 
 The \textbf{OLAP operators} are the following:
 \begin{itemize}
-    \item \textbf{Roll-up:} causes an increase in data aggregation and removes a detail level from a hierarchy.
+    \item \textbf{Roll-up:} causes an increase in data aggregation and removes a detail level from a hierarchy by collapsing the rows that have a feature in common.
     \begin{figure}[ht!]
         \centering
-        \includegraphics[scale=0.4]{images/OLAP_roll_up.png}
+        \includegraphics[scale=0.55]{images/OLAP_roll_up.png}
     \end{figure}
     \item \textbf{Drill-down:} is the complement to the roll-up operator; it reduces data aggregation and adds a new detail level to a hierarchy (e.g., from category to subcategory).
     \begin{figure}[ht!]
         \centering
-        \includegraphics[scale=0.4]{images/OLAP_drill_down.png}
+        \includegraphics[scale=0.55]{images/OLAP_drill_down.png}
     \end{figure}
-    \item \textbf{SLice-and-dice:} reduces the number of cube dimensions after setting one of the dimensions to a specific value (e.g., category = 'Food and Beverages'); the dicing operation reduces the set of data being analysed by a selection criterion.
+    \item \textbf{Slice-and-dice:} the \textit{slicing} operation reduces the number of cube dimensions after setting one of the dimensions to a specific value (e.g., category = 'Food and Beverages'); the \textit{dicing} operation reduces the set of data being analysed by a selection criterion.
     \begin{figure}[ht!]
         \centering
-        \includegraphics[scale=0.6]{images/OLAP_slice_and_dice.png}
+        \includegraphics[scale=0.55]{images/OLAP_slice_and_dice.png}
     \end{figure}
     \item \textbf{Pivot:} implies a change in layouts, aiming at analysing a group of data from a different viewpoint.
     \begin{figure}[ht!]
         \centering
-        \includegraphics[scale=0.4]{images/OLAP_pivot.png}
+        \includegraphics[scale=0.55]{images/OLAP_pivot.png}
     \end{figure}
     \item \textbf{Drill-across:} allows to create a link between concepts in interrelated cubes, in order to compare them.
     \begin{figure}[ht!]
         \centering
-        \includegraphics[scale=0.4]{images/OLAP_drill_across.png}
+        \includegraphics[scale=0.5]{images/OLAP_drill_across.png}
     \end{figure}
     \item \textbf{Drill-through:} switches from multidimensional aggregate data to operational data insources or in the reconciled layer.
     \begin{figure}[ht!]
@@ -113,6 +113,44 @@ The \textbf{OLAP operators} are the following:
 
 \subsection{Extraction, Transformation and Loading (ETL)}
 
+The \textit{\textbf{ETL (Extract, Transform, Load)}} process is a crucial component of data warehousing and business intelligence. It involves \textbf{extracting} data from various sources, \textbf{cleansing} them, \textbf{transforming} them into a consistent format, and \textbf{loading} them into a target destination, such as a data warehouse, where they can be analyzed and queried effectively. Let's analyse the single phases.
+
+\subsubsection{Extraction}
+In the \textbf{extraction phase}, data (\textit{structured} or \textit{unstructured}) is collected from multiple disparate sources, including databases, flat files, APIs, and external systems. The methods used for this process vary depending on the source systems and the nature of the data:
+\begin{itemize}
+    \item \textbf{Static extraction:} retrieving all the data from the source. Used to populate the data warehouse for the first time.
+    \item \textbf{Incremental extraction:} updating the data warehouse regularly only with the data that have been modified. In this case data comes with an associated \textit{timestamp} and \textit{triggers} (related to change transactions for relevant data).
+    \item \textbf{Real-Time extraction:} continous stream of data.
+\end{itemize}
+
+\subsubsection{Cleansing}
+This phase is about all those procedures to improve the \textbf{quality} of the retrieved data, by standardizing it and correcting \textbf{mistakes} like \textit{duplicate or missing data}, \textit{unexpeted use of some fields}, \textit{impossible or wrong values} and \textbf{inconsistences} due to \textit{different practices used} or \textit{typing mistakes}. Each type of problem requires different techniques for its solution. We can distinguish three main techniques:
+\begin{figure}[ht!]
+    \centering
+    \includegraphics[scale=0.34]{images/ETL_dict_based_techniques.png}
+    \caption{Format discrepancies}
+    \label{figDictBasedTec}
+\end{figure}
+\begin{itemize}
+    \item \textbf{Dictionary-based techniques:} they are used to check the correctness of the attribute values based on \textit{lookup tables} and \textit{dictionaries} to search for abbreviations and synonyms. We can apply these techniques if the domain is known and limited. These techniques are suitable for typing mistakes and format discrepancies [Figure \ref{figDictBasedTec}, \ref{figDictBasedTec2}].
+    \begin{figure}[ht!]
+        \centering
+        \includegraphics[scale=0.4]{images/ETL_dict_based_techniques_2.png}
+        \caption{Inconsistences between correlated attributes}
+        \label{figDictBasedTec2}
+    \end{figure}
+    \item \textbf{Approximate merging:} we use this technique when we need to merge data coming from different sources and we don't have a common key to identify matching tuples:
+    \begin{itemize}
+        \item \textit{Approximate join} (DESCRIZIONE E IMMAGINE)
+        \item \textit{Similary functions} (DESCRIZIONE E IMMAGINE).
+    \end{itemize}
+    \item \textbf{Ad-hoc algorithms:} custom algorithms based on specific business rules. (IMMAGINE)
+\end{itemize}
+
+\subsubsection{Transformation}
+
+
+\subsubsection{Loading}
 
 
 \subsection{Data Warehouse Architectures}
