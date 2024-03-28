@@ -135,26 +135,79 @@ This phase is about all those procedures to improve the \textbf{quality} of the 
     \item \textbf{Dictionary-based techniques:} they are used to check the correctness of the attribute values based on \textit{lookup tables} and \textit{dictionaries} to search for abbreviations and synonyms. We can apply these techniques if the domain is known and limited. These techniques are suitable for typing mistakes and format discrepancies [Figure \ref{figDictBasedTec}, \ref{figDictBasedTec2}].
     \begin{figure}[ht!]
         \centering
-        \includegraphics[scale=0.4]{images/ETL_dict_based_techniques_2.png}
+        \includegraphics[scale=0.43]{images/ETL_dict_based_techniques_2.png}
         \caption{Inconsistences between correlated attributes}
         \label{figDictBasedTec2}
     \end{figure}
     \item \textbf{Approximate merging:} we use this technique when we need to merge data coming from different sources and we don't have a common key to identify matching tuples:
     \begin{itemize}
-        \item \textit{Approximate join} (DESCRIZIONE E IMMAGINE)
-        \item \textit{Similary functions} (DESCRIZIONE E IMMAGINE).
+        \item \textit{Approximate join} - comparing records from different datasets using similarity measures or matching algorithms to identify potentially related records. (?)
+        \begin{figure}[ht!]
+            \centering
+            \includegraphics[scale=0.9]{images/ETL_approximate_join.png}
+            \caption{Approximate join on \textit{Customer Address} and \textit{Customer Surname}}
+        \end{figure}
+        \item \textit{Similary functions} - usage of \textbf{affinity functions} (Levenshtein distance, Jaccard similarity, etc.) to compute the similarity between two words and if the result is higher/lower than a treshold, then the two words are the same and the rows can be merged. 
+        \begin{figure}[ht!]
+            \centering
+            \includegraphics[scale=0.78]{images/ETL_similarity_functions.png}
+        \end{figure}
     \end{itemize}
-    \item \textbf{Ad-hoc algorithms:} custom algorithms based on specific business rules. (IMMAGINE)
+    \item \textbf{Ad-hoc algorithms:} custom algorithms based on specific business rules.
 \end{itemize}
 
 \subsubsection{Transformation}
-
+In this phase, data from sources is properly transformed to adjust its format to the reconciled schema. It includes:
+\begin{itemize}
+    \item \textbf{Conversion:} changes on data
+    types and format, like:
+    \begin{itemize}
+        \item \textit{date conversion}: from date to number (e.g. 12/11/2018 $\longrightarrow$ 20181112)
+        \item \textit{string conversion}: lowercase to uppercase (e.g. unibo $\longrightarrow$ UNIBO)
+        \item \textit{naming convention transformation}: short description to long
+        description (e.g. IT $\longrightarrow$ Italy)
+    \end{itemize}
+    \item \textbf{Enrichment:} combination of one or more attribute to create new information, like derived data (e.g. Profit = Receipts - Expenses).
+    \item \textbf{Separation/Concatenation:} attributes concatenation (e.g. customer surname $\Vert$ customer name)
+    \item \textbf{Denormalization/Normalization:} organization of data in tables, where each piece appears only once for normalization and introduction of small redundancy to improve query performance. Typically, in the DWH the data is \textit{denormalized}.
+    \begin{figure}[ht!]
+        \centering
+        \includegraphics[scale=0.8]{images/ETL_denormalization.png}
+        \caption{Denormalization process}
+    \end{figure}
+\end{itemize}
 
 \subsubsection{Loading}
-
+This is the phase of loading data into a DWH, which can be done in batches or in real-time, depending on the volume of data. During the loading process, data integrity and consistency are maintained to ensure that the data remains accurate and usable for analysis. There are two ways of approaching this phase:
+\begin{itemize}
+    \item \textbf{Refresh:} the DWH is completely rewritten (i.e. older data is replaced). It's used in combination with static extraction.
+    \item \textbf{Update:} only those changes applied to source data are added to the DWH. Preexisting data is not deleted or modified. It's used in combination with incremental extraction to regularly update the DWH.
+\end{itemize}
 
 \subsection{Data Warehouse Architectures}
 
+The requirements that a Data Warehouse has to satisfy are the following:
+\begin{itemize}
+    \item \textbf{Separation:} analytical and transactional processing should be kept apart as much as possible.
+    \item \textbf{Scalability:} hardware and software architectures should be easy to upgrade as the data volume, which has to be managed and processed, and the number of users' requirements, which have to be met, progressively increase.
+    \item \textbf{Extensibility:} the architecture should be able to host new applications and technologies without redesigning the whole system.
+    \item \textbf{Security:} monitoring accesses is essential because of the strategic data stored in data warehouses.
+    \item \textbf{Administrability:} DWH management should not be overly difficult.
+\end{itemize}
+
+\subsubsection{Single-Layer Architecture}
+\begin{figure}[ht!]
+    \centering
+    \includegraphics[scale=0.7]{images/DWH_single_layer.png}
+\end{figure}
+A \textit{\textbf{Single-Layer architecture}} for a data warehouse provides a straightforward and integrated approach to data storage, processing, and presentation. The source layer is the only physically available layer and its goal is to minimize the amount of data stored, removing data redundancies. DWH is implemented as a multidimensional view of operational data created by specific \textit{middleware}.
+
+Even if this architecture minimizes the space occupation, there is no separation between analytical and transactional processing, which is not ideal for large DWHs and for supporting complex analytical workloads efficiently.
+
+\subsubsection{Two-Layer Architecture}
+
+
+\subsubsection{Three-Layer Architecture}
 
 
 \subsection{Conceptual Modeling: The Dimensional Fact Model (DFM)}
