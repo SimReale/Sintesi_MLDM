@@ -196,19 +196,44 @@ The requirements that a Data Warehouse has to satisfy are the following:
 \end{itemize}
 
 \subsubsection{Single-Layer Architecture}
-\begin{figure}[ht!]
+
+\begin{wrapfigure}{r}{0.5\textwidth}
     \centering
-    \includegraphics[scale=0.7]{images/DWH_single_layer.png}
-\end{figure}
+    \includegraphics[scale=0.6]{images/DWH_single_layer.png}
+\end{wrapfigure}
+
 A \textit{\textbf{Single-Layer architecture}} for a data warehouse provides a straightforward and integrated approach to data storage, processing, and presentation. The source layer is the only physically available layer and its goal is to minimize the amount of data stored, removing data redundancies. DWH is implemented as a multidimensional view of operational data created by specific \textit{middleware}.
 
 Even if this architecture minimizes the space occupation, there is no separation between analytical and transactional processing, which is not ideal for large DWHs and for supporting complex analytical workloads efficiently.
 
 \subsubsection{Two-Layer Architecture}
 
+A \textbf{\textit{Two-Layers architecture}} provides a separation between physically available sources and data warehouses and includes:
+\begin{itemize}
+    \item \textbf{Source layer:} : it includes a set of heterogeneous data sources (both \textit{internal} and \textit{external sources})
+    \item \textbf{Data staging:} the data stored to sources should be extracted, cleansed to remove inconsistencies and fill gaps, and integrated to merge heterogeneous sources into one common schema. It includes \textit{Extraction, Transformation and Loading (ETL)} procedures.
+    \item \textbf{Data Warehouse layer:} information is stored to one logically centralized single repository that can be directly accessed or it can be used as source for creating \textit{data marts}. \textit{Meta-data repositories} then store information on sources, data staging, data mart schemata, etc.
+    \item \textbf{Analysis layer:} it is accessed by end-user to create reports, dashboard, simulate hypothetical business scenarios, etc.
+\end{itemize}
+
+\begin{figure}[ht!]
+    \centering
+    \includegraphics[scale=0.6]{images/DWH_two_layers.png}
+\end{figure}
 
 \subsubsection{Three-Layer Architecture}
 
+\begin{wrapfigure}{r}{0.6\textwidth}
+    \centering
+    \includegraphics[scale=0.57]{images/DWH_three_layers.png}
+\end{wrapfigure}
+
+In a \textbf{\textit{Three-Layers architecture}} the layers are the same as described in the previous case, with one difference:
+\begin{itemize}
+    \item \textbf{Reconciled layer:} this layer materializes operational data obtained after integrating and cleansing source data. The result data are integrated, consistent, correct, current and detailed.
+\end{itemize}
+
+Then, the reconciled data layer creates a common reference data model for a whole enterprise and it separates the problems of source data extraction and integration from those of data warehouse population. In addiction, the reconciled data leads to more redundancy of operational source data.
 
 \subsection{Conceptual Modeling: The Dimensional Fact Model (DFM)}
 
