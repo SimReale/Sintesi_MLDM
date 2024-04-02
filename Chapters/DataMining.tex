@@ -257,3 +257,99 @@ The \textbf{\textit{Dimensional Fact Model (DFM)}} is a conceptual model created
 \end{itemize}
 
 The entire model is deigned around some key concepts:
+\begin{center}
+    \begin{tabular}{ p{0.17\textwidth} | p{0.5\textwidth} | p{0.33\textwidth}}
+        \textbf{Fact} & It is a concept relevant to decision-making processes. It typically models a set of events taking place within a company. & Sales, purchases \\[1.2cm]
+        \textbf{Measure} & It is a numerical property of a fact and describes a quantitative fact aspect that is relevant to analysis. & Quantity, discount \\[1.2cm]
+        \textbf{Dimension} & It is a fact property with a finite domain and describes an analysis coordination. & Date, product, store \\[0.8cm]
+        \textbf{Dimensional attribute} & Dimensions and other possible attributes, always with discrete values, that describe them. & Category of product \\[1.2cm]
+        \textbf{Hierarchy} & It is a directed tree whose nodes are dimensional attributes and whose arcs model many-to-one associations between dimensional attribute pairs. It includes a dimension, positioned at the tree's root and all of the dimensional attributes that describe it. & Date $\rightarrow$ Month $\rightarrow$ Year \\[2.5cm]
+        \textbf{Primary event} & It is a particular occurrence of a fact, identified by on n-ple made up of a value for each dimension. A value for each measure is associated with each primary event. & 
+    \end{tabular}
+    \begin{tabular}{ p{0.17\textwidth} | p{0.5\textwidth} | p{0.33\textwidth}}
+        \textbf{Secondary event} & Given a set of dimensional attributes, each n-ple of their values identifies a secondary event that aggregates all of the corresponding primary events. Each secondary event is associated with a value for each measure that sums up all the values of the same measure in the corresponding primary events. & 
+    \end{tabular}
+\end{center}
+
+\begin{figure}[ht!]
+    \centering
+    \includegraphics[scale=0.7]{images/DFM_DM_facts.png}
+    \caption{Examples of data marts and related facts}
+    \label{figDMfacts}
+\end{figure}
+
+\begin{figure}[ht!]
+    \centering
+    \includegraphics[scale=0.65]{images/DFM_prim_sec_events.png}
+    \caption{Examples of primary and secondary events}
+    \label{figPrimSecEvents}
+\end{figure}
+
+\textit{\textbf{Aggregation}} requires the definition of a suitable \textit{operator} to compose the measure values that mark primary events into values to be assigned to secondary events. Measures are classified into:
+\begin{itemize}
+    \item \textbf{Flow measures:} refer to a timeframe, at the end of which they are evaluated cumulatively (e.g. quantity sold).
+    \item \textbf{Level Measures:} are evaluated at particular times (e.g. number of products ininventory).
+    \item \textbf{Unit measures:} are evaluated at particular times but are expressed inrelative terms (e.g. unit price).
+\end{itemize}
+A measure is called \textbf{additive} along a dimension when you can use the \textit{SUM operator} to aggregate its values along the dimension hierarchy. If this is not the case, it is called \textbf{non-additive}. A non-additive measure is \textbf{non-aggregable} when you can use no aggregation operator for it.
+\newpage
+\begin{figure}[ht!]
+    \centering
+    \includegraphics[scale=0.92]{images/DFM_measures.png}
+\end{figure}
+Given these measures, we can apply different types of \textit{aggregation operators}, as shown in the figure above:
+\begin{itemize}
+    \item \textbf{Distributive:} calculating aggregates from partial aggregates (e.g. SUM, MIN, MAX).
+    \begin{figure}[ht!]
+        \centering
+        \includegraphics[scale=0.8]{images/DFM_distributive_operator.png}
+    \end{figure}
+    \item \textbf{Algebraic:} requiring the usage of additional information in the form of a finite number of support measures to correctly calculate aggregates from partial aggregates (e.g. AVG).
+    \begin{figure}[ht!]
+        \centering
+        \includegraphics[scale=0.8]{images/DFM_algebraic_operator.png}
+    \end{figure}
+    \item \textbf{Holistic:} calculating aggregates from partial aggregates only via an infinite number of support measures (e.g. RANK).
+\end{itemize}
+
+In addiction to the base attributes, we also have some advanced ones: (INSERIRE IMMAGINI)
+\begin{itemize}
+    \item \textbf{Descriptive attributes:} used to give additional information to specific dimensional attributes, but they are not used as aggregation criteria.
+    \begin{figure}[ht!]
+        \centering
+        \includegraphics[scale=0.6]{images/DFM_descriptive_attributes.png}
+    \end{figure}
+    \item \textbf{Cross-dimensional attributes:} a dimensional or descriptive attributes whose value is defined by the combination of two or more dimensional attributes, possibly belonging to different hierarchies.
+    \item \textbf{Convergence:} Two or more arcs belonging to the same hierarchy and ending at the same dimensional attribute.
+    \item \textbf{Shared hierarchies:} a double circle represents and emphasizes the first attribute to be shared (e.g., City). All descendants of the shared attribute are shared, too. For each incoming arc a role must be added (e.g. customer's city).
+    \item \textbf{Multiple arcs:} the meaning of a multiple arc that goes from an attribute called \textit{a} (e.g., book) to an attribute called \textit{b} (e.g., author) is that a many-to-many association exists between \textit{a} and \textit{b}.
+    \item \textbf{Optional arcs:} used to model scenarios for which an association represented in a fact schema is not defined for a subset of events.
+    \item \textbf{Coverage:} when two or more optional arcs exit from the same attribute \textit{a} (e.g., Product), you can specify their coverage:
+    \begin{itemize}
+        \item the coverage is \textit{\textbf{total}} if the value of at least one of the children is linked to each value of \textit{a}. If, instead, values of \textit{a} exist for which all of the children are undefined, the coverage is \textit{\textbf{partial}}.
+        \item the coverage is \textit{\textbf{disjoint}} if you have a value for at most one of the children corresponding to each value of \textit{a}. If, instead, values of \textit{a} exist linking to values of two or more children, the coverage is \textit{\textbf{overlapping}}.
+    \end{itemize}
+    \item \textbf{Incomplete hierarchies:} one in which one or more levels of aggregation prove missing in some instances (because they are not known or defined).
+    \item \textbf{Recursive hierarchies:} represents a parent-child relationship among the levels.
+\end{itemize}
+
+\paragraph{Logical Design}
+The \textit{\textbf{logical design phase}} defines the data structures (e.g., set of tables and relationships between tables) that represent data marts according to the preselected logical model and optimizes performance by fine tuning these structures.
+
+The logical design phase includes a set of steps that, starting from the conceptual schema, make it
+possible to define the logical schema of a data art. Three main steps to implement a logical schema in a relational DBMS:
+\begin{itemize}
+    \item Translating fact schemata into logical schemata: mainly star or snowflake schemata.
+    \item Materializing views: set of secondary view that aggregate primary view data to improve query performance.
+    \item Fragmenting fact tables vertically and horizontally.
+\end{itemize}
+
+\paragraph{Star schema}
+A star schema is characterized by fact tables and dimension tables. A fact table contains all the measures and descriptive attributes linked to a act. A dimensional table is created for each dimension and it includes all the hierarchy attributes.
+
+(INSERIRE IMMAGINE)
+
+\paragraph{Snowflake schema}
+A star schema variant with dimension tables partially normalized.
+
+(INSERIRE IMMAGINE)
