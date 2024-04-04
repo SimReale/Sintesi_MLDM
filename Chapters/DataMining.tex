@@ -317,20 +317,48 @@ In addiction to the base attributes, we also have some advanced ones: (INSERIRE 
     \item \textbf{Descriptive attributes:} used to give additional information to specific dimensional attributes, but they are not used as aggregation criteria.
     \begin{figure}[ht!]
         \centering
-        \includegraphics[scale=0.6]{images/DFM_descriptive_attributes.png}
+        \includegraphics[scale=0.66]{images/DFM_descriptive_attributes.png}
     \end{figure}
     \item \textbf{Cross-dimensional attributes:} a dimensional or descriptive attributes whose value is defined by the combination of two or more dimensional attributes, possibly belonging to different hierarchies.
+    \begin{figure}[ht!]
+        \centering
+        \includegraphics[scale=0.65]{images/DFM_cross_dimensional_attributes.png}
+    \end{figure}
     \item \textbf{Convergence:} Two or more arcs belonging to the same hierarchy and ending at the same dimensional attribute.
+    \begin{figure}[ht!]
+        \centering
+        \includegraphics[scale=0.65]{images/DFM_convergence.png}
+    \end{figure}
     \item \textbf{Shared hierarchies:} a double circle represents and emphasizes the first attribute to be shared (e.g., City). All descendants of the shared attribute are shared, too. For each incoming arc a role must be added (e.g. customer's city).
+    \begin{figure}[ht!]
+        \centering
+        \includegraphics[scale=0.7]{images/DFM_shared_hierarchies.png}
+    \end{figure}
     \item \textbf{Multiple arcs:} the meaning of a multiple arc that goes from an attribute called \textit{a} (e.g., book) to an attribute called \textit{b} (e.g., author) is that a many-to-many association exists between \textit{a} and \textit{b}.
+    \begin{figure}[ht!]
+        \centering
+        \includegraphics[scale=0.65]{images/DFM_multiple_arcs.png}
+    \end{figure}
     \item \textbf{Optional arcs:} used to model scenarios for which an association represented in a fact schema is not defined for a subset of events.
     \item \textbf{Coverage:} when two or more optional arcs exit from the same attribute \textit{a} (e.g., Product), you can specify their coverage:
     \begin{itemize}
         \item the coverage is \textit{\textbf{total}} if the value of at least one of the children is linked to each value of \textit{a}. If, instead, values of \textit{a} exist for which all of the children are undefined, the coverage is \textit{\textbf{partial}}.
         \item the coverage is \textit{\textbf{disjoint}} if you have a value for at most one of the children corresponding to each value of \textit{a}. If, instead, values of \textit{a} exist linking to values of two or more children, the coverage is \textit{\textbf{overlapping}}.
     \end{itemize}
+    \begin{figure}[ht!]
+        \centering
+        \includegraphics[scale=0.8]{images/DFM_optional_arcs_coverage.png}
+    \end{figure}
     \item \textbf{Incomplete hierarchies:} one in which one or more levels of aggregation prove missing in some instances (because they are not known or defined).
+    \begin{figure}[ht!]
+        \centering
+        \includegraphics[scale=0.7]{images/DFM_incomplete_hierarchies.png}
+    \end{figure}
     \item \textbf{Recursive hierarchies:} represents a parent-child relationship among the levels.
+    \begin{figure}[ht!]
+        \centering
+        \includegraphics[scale=0.7]{images/DFM_recursive_hierarchies.png}
+    \end{figure}
 \end{itemize}
 
 \paragraph{Logical Design}
@@ -345,11 +373,38 @@ possible to define the logical schema of a data art. Three main steps to impleme
 \end{itemize}
 
 \paragraph{Star schema}
-A star schema is characterized by fact tables and dimension tables. A fact table contains all the measures and descriptive attributes linked to a act. A dimensional table is created for each dimension and it includes all the hierarchy attributes.
-
-(INSERIRE IMMAGINE)
+A star schema is characterized by fact tables and dimension tables. A fact table contains all the measures and descriptive attributes linked to a act. A dimensional table is created for each dimension and it includes all the hierarchy attributes [Figure \ref{figStarSchema}].
 
 \paragraph{Snowflake schema}
-A star schema variant with dimension tables partially normalized.
+A star schema variant with dimension tables partially normalized [Figure \ref{figSnowflakeSchema}].
+\newpage
 
-(INSERIRE IMMAGINE)
+\begin{figure}[ht!]
+    \centering
+    \includegraphics[scale=1.1]{images/DFM_star_schema_1.png}
+    \includegraphics[scale=0.7]{images/DFM_star_schema_2.png}
+    \caption{Star Schema}
+    \label{figStarSchema}
+\end{figure}
+
+\begin{figure}[ht!]
+    \centering
+    \includegraphics[scale=0.7]{images/DFM_snowflake_schema_1.png}
+\end{figure}
+\newpage
+
+\begin{figure}[ht!]
+    \centering
+    \includegraphics[scale=0.7]{images/DFM_snowflake_schema_2.png}
+    \caption{Snowflake Schema}
+    \label{figSnowflakeSchema}
+\end{figure}
+
+\section{Data Lake}
+
+The down side of data warehaousing systems is that they can store only structured data and require a predefined schema. Hence, there are a lot of data that are not used for any business process and they need to be stored somewhere.
+\begin{quote}
+    \textit{"The storage environments of EMEA organizations consist of 54\% dark data, 32\% redundant, obsolete and trivial data and 14\% business-critical data. By 2020, this can add up to \$891 billion in storage and management costs that can otherwise be avoided."} [sources: Wikipedia and Datamation].
+\end{quote}
+
+The solution is to use a \textit{\textbf{Data Lake}}, which is a \textit{centralized repository} that allows you to store a vast amount of data in its \textbf{natural/raw format}, usually \textit{object blobs} or \textit{files}.
