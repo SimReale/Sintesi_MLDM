@@ -312,7 +312,7 @@ Given these measures, we can apply different types of \textit{aggregation operat
     \item \textbf{Holistic:} calculating aggregates from partial aggregates only via an infinite number of support measures (e.g. RANK).
 \end{itemize}
 
-In addiction to the base attributes, we also have some advanced ones: (INSERIRE IMMAGINI)
+In addiction to the base attributes, we also have some advanced ones:
 \begin{itemize}
     \item \textbf{Descriptive attributes:} used to give additional information to specific dimensional attributes, but they are not used as aggregation criteria.
     \begin{figure}[ht!]
@@ -402,9 +402,13 @@ A star schema variant with dimension tables partially normalized [Figure \ref{fi
 
 \section{Data Lake}
 
-The down side of data warehaousing systems is that they can store only structured data and require a predefined schema. Hence, there are a lot of data that are not used for any business process and they need to be stored somewhere.
+The down side of data warehousing systems is that they can store only structured data and require a predefined schema. Hence, there are a lot of data that are not used for any business process and they need to be stored somewhere.
 \begin{quote}
     \textit{"The storage environments of EMEA organizations consist of 54\% dark data, 32\% redundant, obsolete and trivial data and 14\% business-critical data. By 2020, this can add up to \$891 billion in storage and management costs that can otherwise be avoided."} [sources: Wikipedia and Datamation].
 \end{quote}
 
-The solution is to use a \textit{\textbf{Data Lake}}, which is a \textit{centralized repository} that allows you to store a vast amount of data in its \textbf{natural/raw format}, usually \textit{object blobs} or \textit{files}.
+The solution is to use a \textit{\textbf{Data Lake}}, which is a \textit{centralized repository} that allows you to store a vast amount of data in its \textbf{natural/raw format}, usually \textit{object blobs} or \textit{files}. Two of the keypoints of this approach are the following:
+\begin{itemize}
+    \item \textbf{Flexibility:} data lakes support various types of data, including structured data from relational databases, semi-structured data like JSON or XML, and unstructured data such as text documents, images, videos, and log files.
+    \item \textbf{Schema-on-read:} 
+\end{itemize}
