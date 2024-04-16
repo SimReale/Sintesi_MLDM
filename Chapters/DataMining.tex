@@ -402,13 +402,38 @@ A star schema variant with dimension tables partially normalized [Figure \ref{fi
 
 \section{Data Lake}
 
-The down side of data warehousing systems is that they can store only structured data and require a predefined schema. Hence, there are a lot of data that are not used for any business process and they need to be stored somewhere.
+The downside of data warehousing systems is that they can store only structured data and require a predefined schema. Hence, there are a lot of data that are not used for any business process and they need to be stored somewhere.
 \begin{quote}
     \textit{"The storage environments of EMEA organizations consist of 54\% dark data, 32\% redundant, obsolete and trivial data and 14\% business-critical data. By 2020, this can add up to \$891 billion in storage and management costs that can otherwise be avoided."} [sources: Wikipedia and Datamation].
 \end{quote}
 
-The solution is to use a \textit{\textbf{Data Lake}}, which is a \textit{centralized repository} that allows you to store a vast amount of data in its \textbf{natural/raw format}, usually \textit{object blobs} or \textit{files}. Two of the keypoints of this approach are the following:
+The solution is to use a \textit{\textbf{Data Lake}}, which is a \textit{centralized repository} that allows you to store a vast amount of data in its \textbf{natural/raw format}, usually \textit{object blobs} or \textit{files}. Some of the keypoints of this approach are the following:
 \begin{itemize}
-    \item \textbf{Flexibility:} data lakes support various types of data, including structured data from relational databases, semi-structured data like JSON or XML, and unstructured data such as text documents, images, videos, and log files.
-    \item \textbf{Schema-on-read:} 
+    \item \textbf{Flexibility:} data lakes support various types of data, including \textit{structured data} from relational databases, \textit{semi-structured data} like JSON or XML, and \textit{unstructured data} such as text documents, images, videos, and log files.
+    \begin{figure}[ht!]
+        \centering
+        \includegraphics[scale=0.6]{images/data_lake_file_formats.png}
+    \end{figure}
+    \item \textbf{Schema-on-read:} unlike the \textbf{schema-on-write} approach used for traditional databases, where data needed to be processed in a particular predefined schema before being stored, in data lakes each data is stored in an unprocessed form and the schema is applied during the query phase. This allows users to interpret and analyze data in different ways without modifying the original data.
+    \item \textbf{Cost-Effectiveness:} data lakes usually rely on low cost scalable storage solutions, such as \textit{cloud object storage}, or \textit{distributed file systems}.
+    \item \textbf{Scalability:} data lakes are designed to scale horizontally, s.t. large volumes of data can be efficiently stored and processed. With such approach, they accomodate users in managing growing data volumes without significant architectural changes.
 \end{itemize}
+
+\begin{wrapfigure}{r}{0.5\textwidth}
+    \centering
+    \includegraphics[scale=0.7]{images/traditional_data_analytics_architecture.png}
+\end{wrapfigure}
+Here on the right we can see how the traditional data analytics structure is, even if there are some negative aspects to be taken into account, like:
+\begin{itemize}
+    \item siloed departmental data;
+    \item long implentation cycles;
+    \item limits of scalability and high costs, since the computation and the storage have to be scaled together;
+    \item lack of support for unstructured data, ML/DS workloads and ad-hoc analytical queries.
+\end{itemize}
+
+\begin{figure}[ht!]
+    \centering
+    \includegraphics[scale=0.65]{images/data_architectures_evolution.png}
+    \caption{Data architectures evolution and comparison [sources: DataArt]}
+\end{figure}
+
