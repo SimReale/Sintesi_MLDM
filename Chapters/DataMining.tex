@@ -419,11 +419,11 @@ The solution is to use a \textit{\textbf{Data Lake}}, which is a \textit{central
     \item \textbf{Scalability:} data lakes are designed to scale horizontally, s.t. large volumes of data can be efficiently stored and processed. With such approach, they accomodate users in managing growing data volumes without significant architectural changes.
 \end{itemize}
 
-\begin{wrapfigure}{r}{0.5\textwidth}
+\begin{figure}[ht!]
     \centering
     \includegraphics[scale=0.7]{images/traditional_data_analytics_architecture.png}
-\end{wrapfigure}
-Here on the right we can see how the traditional data analytics structure is, even if there are some negative aspects to be taken into account, like:
+\end{figure}
+In the figure above, we can see how the traditional data analytics structure is, even if there are some negative aspects to be taken into account, like:
 \begin{itemize}
     \item siloed departmental data;
     \item long implentation cycles;
@@ -437,3 +437,31 @@ Here on the right we can see how the traditional data analytics structure is, ev
     \caption{Data architectures evolution and comparison [sources: DataArt]}
 \end{figure}
 
+\begin{figure}[ht!]
+    \centering
+    \includegraphics[scale=0.6]{images/data_lake_architecture.png}
+    \caption{Data Lake components}
+    \label{figDLstructure}
+\end{figure}
+
+In the figure \ref{figDLstructure} we see how a data lake works, where the \textbf{data ingestion} is not so direct as it seems, since the ETL process is not performed and we have different ways of acquiring all the information depending on the sources, as shown below.
+\begin{figure}[ht!]
+    \centering
+    \includegraphics[scale=0.7]{images/DL_data_ingestion.png}
+\end{figure}
+\begin{figure}[ht!]
+    \centering
+    \includegraphics[scale=0.7]{images/DL_data_ingestion_options.png}
+    \caption{\textit{Streaming data ingestion} for data logs or application events, while \textit{CDC (Change Data Capture)} for continous ingestion, capturing streaming changes or database migration to cloud}
+\end{figure}
+
+There are also some \textbf{\textit{no-code tools}} which are based on high level blocks where you tune the parameters in order for the process to work. They can be useful for basic operations for their \textit{simplicity}, but they have a very low \textit{flexibility} with limited opportunities.
+
+Once we ingest anything, in the \textbf{storage phase} data can belong to different types:
+\begin{itemize}
+    \item[\textbf{Raw:}] immutable store that cannot/should not be changed after it has been written; self-descriptive with metadata; useful for disaster recovery.
+    \item[\textbf{Optimized:}] as raw data grow, querying directly them become slower to gain speed data can be transformed in optimized formats.
+    \item[\textbf{Analytics:}] BI-ready and machine-learning ready data and tables.
+\end{itemize}
+
+[INSERIRE IMMAGINE]
