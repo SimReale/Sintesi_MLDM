@@ -444,19 +444,21 @@ In the figure above, we can see how the traditional data analytics structure is,
     \label{figDLstructure}
 \end{figure}
 
+\paragraph{Ingestion}
 In the figure \ref{figDLstructure} we see how a data lake works, where the \textbf{data ingestion} is not so direct as it seems, since the ETL process is not performed and we have different ways of acquiring all the information depending on the sources, as shown below.
 \begin{figure}[ht!]
     \centering
-    \includegraphics[scale=0.7]{images/DL_data_ingestion.png}
+    \includegraphics[scale=0.73]{images/DL_data_ingestion.png}
 \end{figure}
 \begin{figure}[ht!]
     \centering
-    \includegraphics[scale=0.7]{images/DL_data_ingestion_options.png}
+    \includegraphics[scale=0.73]{images/DL_data_ingestion_options.png}
     \caption{\textit{Streaming data ingestion} for data logs or application events, while \textit{CDC (Change Data Capture)} for continous ingestion, capturing streaming changes or database migration to cloud}
 \end{figure}
 
 There are also some \textbf{\textit{no-code tools}} which are based on high level blocks where you tune the parameters in order for the process to work. They can be useful for basic operations for their \textit{simplicity}, but they have a very low \textit{flexibility} with limited opportunities.
 
+\paragraph{Storage}
 Once we ingest anything, in the \textbf{storage phase} data can belong to different types:
 \begin{itemize}
     \item[\textbf{Raw:}] immutable store that cannot/should not be changed after it has been written; self-descriptive with metadata; useful for disaster recovery.
@@ -464,4 +466,23 @@ Once we ingest anything, in the \textbf{storage phase} data can belong to differ
     \item[\textbf{Analytics:}] BI-ready and machine-learning ready data and tables.
 \end{itemize}
 
-[INSERIRE IMMAGINE]
+\begin{figure}[ht!]
+    \centering
+    \includegraphics[scale=0.8]{images/DL_data_types.png}
+\end{figure}
+
+One important step now is to \textbf{catalog} data, in order to avoid the so called \textbf{data swamp}, which is a situation in which a data lake becomes disorganized, chaotic and unmanageable such that \textit{no useful analysis is possible}. A lack of schema or descriptive metadata makes hard to consume or query the data, while a lack of semantic consistency makes challenging to perform analysis/mining.
+
+In this case, \textbf{\textit{metadata}} assume a crucial role by helping engineers, data scientists, and analysts to discover, understand, and use the data effectively and ensuring that the data lake remains a valuable resource for the organization. Examples are:
+\begin{itemize}
+    \item \textbf{Data source:} information about where the data originated, such as the source system, data provider, or data feed.
+    \item \textbf{Data schema:} describes the structure of the data, including the names and the data types of columns or attributes.
+    \item \textbf{Data format:} specifies the file format or encoding used for the data files, which can be important for data processing and analytics.
+    \item \textbf{Data quality metrics:} information about data quality such as the percentage of missing values or data accuracy statistics.
+    \item \textbf{Data lifecycle:} information about how long the data should be retained in the data lake, data retention policies, and archiving rules.
+    \item \textbf{Data ownership:} information about the team or department responsible for managing and maintaining the data.
+    \item \textbf{Data lineage:} tracks the data's lineage, including its transformation processes, dependencies, and any data transformations applied to it.
+    \item \textbf{Access control:} metadata can specify who has access to the data, what permissions they have, and any security measures in place.
+    \item \textbf{Data classification:} indicates the sensitivity or classification level of the data, which can be crucial for compliance with data regulations.
+    \item \textbf{Data usage information:} records how frequently the data is accessed, who accesses it, and what types of analytics or applications use the data.
+\end{itemize}
