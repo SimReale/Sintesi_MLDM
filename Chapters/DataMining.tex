@@ -486,3 +486,38 @@ In this case, \textbf{\textit{metadata}} assume a crucial role by helping engine
     \item \textbf{Data classification:} indicates the sensitivity or classification level of the data, which can be crucial for compliance with data regulations.
     \item \textbf{Data usage information:} records how frequently the data is accessed, who accesses it, and what types of analytics or applications use the data.
 \end{itemize}
+
+\section{The CRISP-DM methodology}
+
+Data Mining is a process and as all the other processes has steps and complex choices to be analyzed, managed and most of all standardized. One of the most used approaches in modern DM problems is the \textbf{\textit{CRISP-DM methodology}} (\textit{Cross-Industry Standard Process for Data Mining}), which provides a model to guide the Data Mining process in six major phases:
+\begin{itemize}
+    \item \textbf{Business Understanding}
+    \item \textbf{Data Understanding}
+    \item \textbf{Data Preparation}
+    \item \textbf{Modeling}
+    \item \textbf{Evaluation}
+    \item \textbf{Deployment}
+\end{itemize}
+
+\begin{figure}[ht!]
+    \centering
+    \includegraphics[scale=0.7]{images/CRISP_DM.png}
+\end{figure}
+
+\paragraph{Business Understanding}
+In this initial phase, the focus is on understanding the \textbf{business objectives}, \textbf{requirements}, \textbf{costs} and \textbf{goals} of the data mining project. This involves identifying the business problem or opportunity, defining the project scope, and establishing \textbf{success criteria}.
+
+\paragraph{Data Understanding}
+In this phase, the focus shifts to understanding the data that will be used for the analysis. This includes \textbf{data collection}, \textbf{exploration}, and initial assessment to gain insights into the data \textbf{quality}, \textbf{structure}, and content. It involves identifying relevant data sources, assessing data availability, and understanding the relationships between different data elements.
+
+\paragraph{Data Preparation}
+In the data preparation phase, the raw data is processed and transformed into a format suitable for analysis. This involves tasks such as \textbf{cleaning}, \textbf{filtering}, \textbf{integrating}, and \textbf{transforming} the data to address issues such as missing values, outliers, and inconsistencies. Data preparation also includes feature engineering, where new variables or features may be created to improve the predictive power of the data. Usually this is a very expensive and time consuming phase.
+
+\paragraph{Modeling}
+The modeling phase focuses on selecting appropriate data mining techniques and building \textit{predictive} or \textit{descriptive models} to address the business objectives. This involves \textbf{selecting algorithms}, \textbf{partitioning the data} into training and testing sets, and \textbf{building} and \textbf{evaluating} models using techniques such as classification, regression, clustering, or association rule mining.
+
+\paragraph{Evaluation}
+In the evaluation phase, the performance of the models is assessed and evaluated against the project objectives and success criteria established in the business understanding phase, on a \textit{qualitative} and \textit{quantitative} basis. This involves testing the models on unseen data, analyzing their \textit{performance metrics} (such as accuracy, precision, recall, or AUC), and \textbf{selecting the best-performing model} for deployment.
+
+\paragraph{Deployment}
+The final phase of the CRISP-DM process is deployment, where the selected model is integrated into the business operations or decision-making processes. This involves deploying the model into \textit{production environments}, monitoring its performance over time, and incorporating feedback to ensure its effectiveness and reliability in real-world scenarios.
